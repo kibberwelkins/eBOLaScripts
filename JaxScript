@@ -1,0 +1,51 @@
+myHero = GetMyHero()
+local ts
+if myHero.name ~= "Jax" then return end
+function onLoad()
+     config=ScriptConfig("Jax Script Menu","mainMenu")
+      config:addParam("draw","Draw circle",SCRIPT_PARAM_ONOFF,true)
+
+       config:addParam("useW",Should I use W in the combo",SCRIPT_PARAM_ONOFF,true)
+ 
+        config:addParam("useE",Should I use E in the combo",SCRIPT_PARAM_ONOFF,true)
+
+Config:addParam("combo", "Combo mode", SCRIPT_PARAM_ONKEYDOWN, false, string.byte(" "))
+ ts=TargetSelector(TARGET_LOW_HP_PRIORITY,700)
+    SendChat("/all GLHF!")
+    SendChat("/all Good Luck Have Fun!")
+end
+
+function onTick()
+     ts:Update()
+     if(myHero.health<250)  then
+         PrintChat("Drink a health potion or recall!")
+     end
+     if(myHero.mana<100)    then
+          PrintChat("Drink a mana potion or 
+recall!")
+      end
+     if(myHero.isRecalling)   then
+            PrintChat("Buy new item!")
+       end
+      if(config.combo) 
+
+           if(ts.target ~= nil)
+                if(config.useW)
+                     if(myHero:CanUseSpell(_W) == READY)
+                           CastSpell(_W)
+                     end
+                end
+                if(config.useE)
+                     if(myHero:CanUseSpell(_E) == READY)
+                     CastSpell(_E)
+                     end
+                end
+              if(myHero:CanUseSpell(_Q)==READY)
+                    CastSpell(_Q,ts.target)
+             end
+             end
+      end
+end
+
+function onDraw()                     drawCircle(myHero.x,myHero.y,myHero.z,700,  0x00ff1e)   drawCircle(myHero.x,myHero.y,myHero.z,myHero.range,0xdc143c)
+end
