@@ -27,9 +27,9 @@ recall!")
      if(myHero.isRecalling)   then
             PrintChat("Buy new item!")
        end
-      if(config.combo) 
+      if(ts.targrt ~= nil) 
 
-           if(ts.target ~= nil)
+           if(config.combo)
                 if(config.useW)
                      if(myHero:CanUseSpell(_W) == READY)
                            CastSpell(_W)
